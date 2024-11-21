@@ -32,6 +32,7 @@ TokenType tokenType;
 void skipBlanks();
 void readIdentKeyword();
 void readNumber();
+int isTooLongNumber(char *str);
 
 /***************************************************************/
 Token *getToken(void)
@@ -211,6 +212,8 @@ Token *getToken(void)
     return token;
   case 20:
     // TODO
+    ln = lineNo;
+    cn = colNo;
     readChar();
     if (charCodes[currentChar] == CHAR_EQ)
     {
@@ -227,8 +230,9 @@ Token *getToken(void)
     state = 0;
     return token;
   case 22:
-    token = makeToken(TK_NONE, lineNo, colNo - 1);
-    error(ERR_INVALIDSYMBOL, token->lineNo, token->colNo);
+    token = makeToken(TK_NONE, ln, cn);
+    error(ERR_INVALIDSYMBOL, ln, cn);
+    state = 0;
     return token;
   case 23:
     // TODO
@@ -279,6 +283,8 @@ Token *getToken(void)
     state = 0;
     return makeToken(SB_COLON, lineNo, colNo - 1);
   case 31:
+    ln = lineNo;
+    cn = colNo;
     readChar();
     if (currentChar == EOF)
       state = 34;
@@ -289,6 +295,8 @@ Token *getToken(void)
     return getToken();
   case 32:
     c = currentChar;
+    ln = lineNo;
+    cn = colNo;
     readChar();
     if (charCodes[currentChar] == CHAR_SINGLEQUOTE)
       state = 33;
@@ -303,7 +311,11 @@ Token *getToken(void)
     state = 0;
     return token;
   case 34:
-    error(ERR_INVALIDCHARCONSTANT, lineNo, colNo - 2);
+    token = makeToken(TK_NONE, ln, cn);
+    error(ERR_INVALIDCHARCONSTANT, ln, cn);
+    readChar();
+    state = 0;
+    return token;
   case 35: // tokens begin with lpar, skip comments
     ln = lineNo;
     cn = colNo;
@@ -323,7 +335,6 @@ Token *getToken(void)
         state = 41;
       }
     return getToken();
-
   case 36:
     // TODO
     readChar();
@@ -372,7 +383,11 @@ Token *getToken(void)
     state = 0;
     return getToken();
   case 40:
+    token = makeToken(TK_NONE, lineNo, colNo);
     error(ERR_ENDOFCOMMENT, lineNo, colNo);
+    readChar();
+    state = 0;
+    return token;
   case 41:
     state = 0;
     return makeToken(SB_LPAR, ln, cn);
@@ -385,6 +400,7 @@ Token *getToken(void)
     token = makeToken(TK_NONE, lineNo, colNo);
     error(ERR_INVALIDSYMBOL, lineNo, colNo);
     readChar();
+    state = 0;
     return token;
   }
 }
@@ -632,4 +648,24 @@ void readNumber()
     readChar();
   }
   str[count] = '\0';
+
+  if (isTooLongNumber(str))
+  {
+    error(ERR_NUMBERTOOLONG, ln, cn);
+  }
+}
+
+int isTooLongNumber(char *str)
+{
+  char *endptr;
+  long long value = strtoll(str, &endptr, 10);
+  if (*endptr != '\0')
+  {
+    return 0;
+  }
+  if (value > INT_MAX || value < INT_MIN)
+  {
+    return 1;
+  }
+  return 0;
 }
