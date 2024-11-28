@@ -10,22 +10,22 @@
 
 void error(ErrorCode err, int lineNo, int colNo) {
   switch (err) {
-  case ERR_ENDOFCOMMENT:
+  case ERR_END_OF_COMMENT:
     printf("%d-%d:%s\n", lineNo, colNo, ERM_ENDOFCOMMENT);
     break;
-  case ERR_IDENTTOOLONG:
+  case ERR_IDENT_TOO_LONG:
     printf("%d-%d:%s\n", lineNo, colNo, ERM_IDENTTOOLONG);
     break;
-  case ERR_NUMBERTOOLONG:
+  case ERR_NUMBER_TOO_LONG:
     printf("%d-%d:%s\n", lineNo, colNo, ERM_NUMBERTOOLONG);
     break;
   case ERR_INVALIDCHARCONSTANT:
     printf("%d-%d:%s\n", lineNo, colNo, ERM_INVALIDCHARCONSTANT);
     break;
-  case ERR_INVALIDSYMBOL:
+  case ERR_INVALID_SYMBOL:
     printf("%d-%d:%s\n", lineNo, colNo, ERM_INVALIDSYMBOL);
     break;
-  case ERR_INVALIDCONSTANT:
+  case ERR_INVALID_CONSTANT:
     printf("%d-%d:%s\n", lineNo, colNo, ERM_INVALIDCONSTANT);
     break;
   case ERR_INVALIDTYPE:

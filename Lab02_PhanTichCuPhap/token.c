@@ -57,7 +57,6 @@ Token* makeToken(TokenType tokenType, int lineNo, int colNo) {
   token->colNo = colNo;
   return token;
 }
-
 char *tokenToString(TokenType tokenType) {
   switch (tokenType) {
   case TK_NONE: return "None";
@@ -109,3 +108,4 @@ char *tokenToString(TokenType tokenType) {
   default: return "";
   }
 }
+
