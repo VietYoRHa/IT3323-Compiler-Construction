@@ -1,0 +1,15 @@
+Program INVALIDRETURN; 
+   
+Var n : Integer;
+
+Function G(k : Integer) : Integer;
+  Begin
+    G := k + 1;
+  End;
+
+Function F(n : Integer) : Integer;
+  Begin
+    If n = 0 Then G := 1 Else G := N * G (N - 1);
+  End;
+  
+End. 
