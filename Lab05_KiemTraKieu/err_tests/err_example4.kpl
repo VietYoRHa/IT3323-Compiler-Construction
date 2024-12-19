@@ -1,0 +1,7 @@
+Program ErrExample4; (* Condition type mismatch *)
+Var
+  n: Integer;
+Begin
+  If n = 'A' Then
+    n := 10;
+End. (* ErrExample4 *)

@@ -1,0 +1,8 @@
+Program ErrExample5; (* Formal parameter list has fewer parameters than actual *)
+Procedure Test(a: Integer);
+Begin
+End;
+
+Begin
+  Call Test(1, 2);
+End. (* ErrExample5 *)

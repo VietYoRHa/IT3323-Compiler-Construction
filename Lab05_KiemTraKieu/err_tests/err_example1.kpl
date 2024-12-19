@@ -1,0 +1,5 @@
+Program ErrExample1; (* Invalid constant *)
+Const
+  c = +'A';
+Begin
+End. (* ErrExample1 *)

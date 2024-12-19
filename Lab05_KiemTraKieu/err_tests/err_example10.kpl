@@ -1,0 +1,9 @@
+Program ErrExample10; (* Passing non-LValue to Var parameter *)
+Const A = 'b';
+Procedure Test(Var a: Integer);
+Begin
+End;
+
+Begin
+  Call Test(A);
+End. (* ErrExample10 *)

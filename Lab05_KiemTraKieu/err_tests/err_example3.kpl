@@ -1,0 +1,6 @@
+Program ErrExample3; (* Array dimension error *)
+Var
+  arr: Array(.10.) Of Integer;
+Begin
+  arr(.1.)(.2.) := 5;
+End. (* ErrExample3 *)

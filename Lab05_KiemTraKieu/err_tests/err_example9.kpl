@@ -1,0 +1,11 @@
+Program ErrExample9; (* Parameter type mismatch *)
+Var
+  CH: Char;
+Procedure Test(a: Integer);
+Begin
+End;
+
+Begin
+  CH := 'A';
+  Call Test(CH);
+End. (* ErrExample9 *)

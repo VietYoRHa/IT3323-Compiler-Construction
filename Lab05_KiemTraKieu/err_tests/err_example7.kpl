@@ -1,0 +1,11 @@
+Program ErrExample7; (* Formal parameter list is empty, but actual has parameters *)
+Var
+    i: Integer;
+Procedure Test;
+Begin
+End;
+
+Begin
+  i := 1;
+  Call Test(i);
+End. (* ErrExample7 *)
