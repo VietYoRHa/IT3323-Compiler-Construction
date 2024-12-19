@@ -1,0 +1,6 @@
+Program ErrExample2; (* Assign type mismatch *)
+Var
+  n: Integer;
+Begin
+  n := 'A';
+End. (* ErrExample2 *)

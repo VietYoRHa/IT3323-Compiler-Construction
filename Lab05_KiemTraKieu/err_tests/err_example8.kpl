@@ -1,0 +1,8 @@
+Program ErrExample8; (* Actual parameter list is empty, but formal has parameters *)
+Procedure Test(a: Integer);
+Begin
+End;
+
+Begin
+  Call Test;
+End. (* ErrExample8 *)
